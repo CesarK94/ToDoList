@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoList.MainPage"
+             xmlns:local="clr-namespace:ToDoList.ViewModel"
+             >
+    <ContentPage.BindingContext>
+        <local:MainViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            <Image
+                Source="dotnet_bot.png"
+                HeightRequest="185"
+                Aspect="AspectFit"
+                SemanticProperties.Description="dot net bot in a race car number eight" />
+
+            <Label
+                Text="Hello, World!"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1" />
+
+            <Label
+                Text="{Binding Mensaje}"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dont met"
+                FontSize="18"
+                HorizontalOptions="Center"
+                />
+
+            <Button
+                x:Name="CounterBtn"
+                Text="Click me" 
+                Command="{Binding StartAppCommand}"
+                SemanticProperties.Hint="Counts the number of times you click"
+                HorizontalOptions="Fill" />
+            <Entry
+                Placeholder="Enter your name"
+                Text="{Binding Name}"
+                HorizontalOptions="Fill" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
