@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ToDoList.Pages;
 
 
 namespace ToDoList.ViewModel
@@ -24,7 +25,9 @@ namespace ToDoList.ViewModel
         [RelayCommand]
         private void StartApp()
         {
-            Shell.Current.GoToAsync("TO_DO");
+            Shell.Current.GoToAsync(nameof(RegistroTareaPage));
         }
+
+
     }
 }

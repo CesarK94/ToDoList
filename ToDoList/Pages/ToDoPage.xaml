@@ -8,8 +8,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add">
             <ToolbarItem.IconImageSource>
-                <FontImageSource FontFamily="MaterialDesignIcons"
-                                 Glyph="{x:Static helpers:MaterialIconHelper}"/>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="{x:Static helpers:MaterialIconHelper.Plus}" Color="Black"/>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>

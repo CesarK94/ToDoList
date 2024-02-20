@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoList.Pages.RegistroTareaPage"
+             Title="RegistroTareaPage">
+    <VerticalStackLayout>
+        <Label 
+            Text="Nueva Tarea"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            />
+        <Entry 
+            Placeholder="Titulo" 
+            VerticalOptions="StartAndExpand"
+            HorizontalOptions="StartAndExpand"
+            Text="{Binding Tarea.Titulo}"/>
+        <Entry 
+            Placeholder="Descripción de la tarea"
+            VerticalOptions="StartAndExpand"
+            HorizontalOptions="StartAndExpand"
+            Text="{Binding Tarea.Descripcion}"/>
+        <DatePicker 
+            VerticalOptions="StartAndExpand"
+            HorizontalOptions="StartAndExpand"
+            Date="{Binding Tarea.FechaInicial}"/>
+        <DatePicker
+            VerticalOptions="StartAndExpand"
+            HorizontalOptions="StartAndExpand"
+            Date="{Binding Tarea.FechaFinal}"/>
+        <Button
+            Text="Guardar Tarea"
+            VerticalOptions="StartAndExpand"
+            HorizontalOptions="StartAndExpand"
+            Command="{Binding GuardarCommand}"/>
+    </VerticalStackLayout>
+</ContentPage>

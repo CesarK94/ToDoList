@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using ToDoList.Pages;
+using ToDoList.Services;
+using ToDoList.ViewModel;
 
 namespace ToDoList
 {
@@ -7,6 +10,12 @@ namespace ToDoList
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
+            // injeccion de dependencias
+            // esto es para que se pueda inyectar el servicio en el viewmodel
+            // y el viewmodel en la pagina
+            builder.Services.AddSingleton<FakeTaskService>();
+            builder.Services.AddSingleton<RegistroTareaPage>();
+            builder.Services.AddSingleton<RegistroTareaViewModel>();
             builder
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
