@@ -26,6 +26,7 @@ namespace ToDoList.ViewModel
         private void Guardar()
         {
             fakeService.AddTask(Tarea);
+            Shell.Current.GoToAsync("..");
         }
     }
 }

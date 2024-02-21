@@ -7,7 +7,7 @@ namespace ToDoList
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute("TO_DO", typeof(ToDoPage));
+            Routing.RegisterRoute(nameof(ToDoPage), typeof(ToDoPage));
             Routing.RegisterRoute(nameof(RegistroTareaPage), typeof(RegistroTareaPage));
         }
     }
