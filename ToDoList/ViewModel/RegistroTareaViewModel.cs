@@ -10,14 +10,14 @@ using ToDoList.Services;
 
 namespace ToDoList.ViewModel
 {
-    public partial class RegistroTareaViewModel : ObservableObject
+    public partial class RegistroTareaViewModel : ObservableObject, IQueryablePageViewModel
     {
         [ObservableProperty]
         private Tarea tarea;
 
         private FakeTaskService fakeService;
 
-        public RegistroTareaViewModel(FakeTaskService service)
+        public RegistroTareaViewModel(IDataService service)
         {
             tarea = new Tarea();
             fakeService = service;
@@ -27,6 +27,14 @@ namespace ToDoList.ViewModel
         {
             fakeService.AddTask(Tarea);
             Shell.Current.GoToAsync("..");
+        }
+
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            if (query.TryGetValue("TAREA", out object value))
+            {
+                Tarea = value as Tarea;
+            }
         }
     }
 }
