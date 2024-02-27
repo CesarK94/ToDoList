@@ -11,11 +11,13 @@ namespace ToDoList.ViewModel
     public partial class TodoViewModel : ObservableObject
     {
         public ObservableCollection<Tarea> Tareas { get; set; }
-        private FakeTaskService fakeService;
+        private IDataService fakeService;
 
         [ObservableProperty]
+        private Tarea TareaSeleccionada;
+        [ObservableProperty]
         private bool isRefresh;
-        public TodoViewModel(FakeTaskService service)
+        public TodoViewModel(IDataService service)
         {
             Tareas = new();
             fakeService = service;
@@ -38,6 +40,22 @@ namespace ToDoList.ViewModel
         public void AbrirRegistro()
         {
             Shell.Current.GoToAsync(nameof(RegistroTareaPage));
+        }
+
+        [RelayCommand]
+        public void EditarRegistro()
+        {
+            if (TareaSeleccionada == null) 
+            {
+                return;
+            }
+
+            ShellNavigationQueryParameters parametros = new()
+            {
+                { "Tarea", TareaSeleccionada }
+            };
+
+            Shell.Current.GoToAsync(nameof(RegistroTareaPage), parametros);
         }
 
 

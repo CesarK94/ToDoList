@@ -13,7 +13,9 @@ namespace ToDoList
             // injeccion de dependencias
             // esto es para que se pueda inyectar el servicio en el viewmodel
             // y el viewmodel en la pagina
-            builder.Services.AddSingleton<FakeTaskService>();
+            #id DEBUG
+            builder.Services.AddSingleton<IDataService, FakeTaskService>();
+            #endif
             builder.Services.AddTransient<RegistroTareaPage>();
             builder.Services.AddTransient<RegistroTareaViewModel>();
             builder.Services.AddTransient<ToDoPage>();
