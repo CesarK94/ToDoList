@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SQLite;
+using SQLiteNetExtensions.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +10,19 @@ namespace ToDoList.Models.Encuestas
 {
     public class Encuesta
     {
-        public List<Pregunta> Preguntas { get; set; }
-        public List<Respuesta> Respuestas { get; set; }
+        [AutoIncrement, PrimaryKey]
+        public int Id { get; set; }
+        [ManyToMany(typeof(Pregunta))]
+
+        public Pregunta[] Preguntas { get; set; }
+
+        [ManyToMany(typeof(Respuesta))]
+        public Respuesta[] Respuestas { get; set; }
 
         public Encuesta()
         {
-            Preguntas = new();
-            Respuestas = new();
+            Preguntas = [];
+            Respuestas = [];
         }
     }
 }

@@ -10,12 +10,12 @@ using ToDoList.Services;
 
 namespace ToDoList.ViewModel
 {
-    public partial class RegistroTareaViewModel : ObservableObject, IQueryablePageViewModel
+    public partial class RegistroTareaViewModel : ObservableObject, IQueryAttributable
     {
         [ObservableProperty]
         private Tarea tarea;
 
-        private FakeTaskService fakeService;
+        private IDataService fakeService;
 
         public RegistroTareaViewModel(IDataService service)
         {

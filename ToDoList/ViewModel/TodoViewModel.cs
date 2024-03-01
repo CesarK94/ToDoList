@@ -14,7 +14,7 @@ namespace ToDoList.ViewModel
         private IDataService fakeService;
 
         [ObservableProperty]
-        private Tarea TareaSeleccionada;
+        private Tarea tareaSeleccionada;
         [ObservableProperty]
         private bool isRefresh;
         public TodoViewModel(IDataService service)
@@ -45,14 +45,14 @@ namespace ToDoList.ViewModel
         [RelayCommand]
         public void EditarRegistro()
         {
-            if (TareaSeleccionada == null) 
+            if (tareaSeleccionada == null) 
             {
                 return;
             }
 
             ShellNavigationQueryParameters parametros = new()
             {
-                { "Tarea", TareaSeleccionada }
+                { "Tarea", tareaSeleccionada }
             };
 
             Shell.Current.GoToAsync(nameof(RegistroTareaPage), parametros);

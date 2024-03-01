@@ -10,11 +10,10 @@ namespace ToDoList
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
-            // injeccion de dependencias
-            // esto es para que se pueda inyectar el servicio en el viewmodel
-            // y el viewmodel en la pagina
-            #id DEBUG
+          
+            #if DEBUG
             builder.Services.AddSingleton<IDataService, FakeTaskService>();
+            builder.Services.AddSingleton<IDataService, IFirebaseDataService>();
             #endif
             builder.Services.AddTransient<RegistroTareaPage>();
             builder.Services.AddTransient<RegistroTareaViewModel>();

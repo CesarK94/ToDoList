@@ -7,7 +7,7 @@ using ToDoList.Models;
 
 namespace ToDoList.Services
 {
-    public class FakeTaskService
+    public class FakeTaskService : IDataService
     {
         public List<Tarea> Tasks { get; set; }
         public FakeTaskService()
@@ -23,7 +23,7 @@ namespace ToDoList.Services
             }
         }
 
-        public void AddTask(Tarea tarea)
+        public async Task AddTask(Tarea tarea)
         {
             Tasks.Add(tarea);
         }
@@ -32,5 +32,6 @@ namespace ToDoList.Services
         {
             return Tasks;
         }
+
     }
 }
