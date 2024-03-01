@@ -2,8 +2,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ToDoList.Pages.RegistroTareaPage"
+             xmlns:local="clr-namespace:ToDoList.Converters"
              Title="RegistroTareaPage">
-    <VerticalStackLayout>
+    <ContentPage.Resources>
+        <local:IsTareaTipoEncuesta x:Key="isTareaTipoEncuesta" />
+    </ContentPage.Resources>
+    <VerticalStackLayout
+        HorizontalOptions="CenterAndExpand">
         <Label 
             Text="Nueva Tarea"
             VerticalOptions="Center" 
@@ -11,26 +16,39 @@
             />
         <Entry 
             Placeholder="Titulo" 
-            VerticalOptions="StartAndExpand"
-            HorizontalOptions="StartAndExpand"
+            VerticalOptions="Center"
+            HorizontalOptions="FillAndExpand"
             Text="{Binding Tarea.Titulo}"/>
         <Entry 
             Placeholder="Descripción de la tarea"
-            VerticalOptions="StartAndExpand"
-            HorizontalOptions="StartAndExpand"
+            VerticalOptions="Center"
+            HorizontalOptions="FillAndExpand"
             Text="{Binding Tarea.Descripcion}"/>
         <DatePicker 
-            VerticalOptions="StartAndExpand"
-            HorizontalOptions="StartAndExpand"
+            VerticalOptions="Center"
+            HorizontalOptions="FillAndExpand"
             Date="{Binding Tarea.FechaInicial}"/>
         <DatePicker
-            VerticalOptions="StartAndExpand"
-            HorizontalOptions="StartAndExpand"
+            VerticalOptions="Center"
+            HorizontalOptions="FillAndExpand"
             Date="{Binding Tarea.FechaFinal}"/>
+        <Picker
+            x:Name="pikerTipo"
+            Title="Tipo de Tarea"
+            ItemsSource="{Binding TiposTarea}"
+            />
+        <Button
+            Text="Agregar Encuesta"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            IsVisible="{Binding Source={x:Reference pikerTipo},
+                        Path=SelectedIndex,
+                        Converter={StaticResource isTareaTipoEncuesta}}"
+            Command="{Binding AbrirRegistroEcuestaCommand}"/>
         <Button
             Text="Guardar Tarea"
             VerticalOptions="StartAndExpand"
-            HorizontalOptions="StartAndExpand"
+            HorizontalOptions="FillAndExpand"
             Command="{Binding GuardarCommand}"/>
     </VerticalStackLayout>
 </ContentPage>

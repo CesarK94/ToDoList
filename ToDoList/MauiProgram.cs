@@ -19,6 +19,8 @@ namespace ToDoList
             builder.Services.AddTransient<RegistroTareaViewModel>();
             builder.Services.AddTransient<ToDoPage>();
             builder.Services.AddTransient<TodoViewModel>();
+            builder.Services.AddTransient<RegistroEncuesta>();
+            builder.Services.AddTransient<RegistroEncuestaViewModel>();
 
             builder
                 .UseMauiApp<App>()
