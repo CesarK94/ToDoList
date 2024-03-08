@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ToDoList.MainPage"
              xmlns:local="clr-namespace:ToDoList.ViewModel"
+             Title=""
              >
+    
     <ContentPage.BindingContext>
         <local:MainViewModel />
     </ContentPage.BindingContext>
@@ -11,7 +13,7 @@
     <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
-            Spacing="25">
+            Spacing="30">
             <Image
                 Source="dotnet_bot.png"
                 HeightRequest="185"
@@ -19,28 +21,42 @@
                 SemanticProperties.Description="dot net bot in a race car number eight" />
 
             <Label
-                Text="Hello, World!"
+                Text='Bienvenido a la APP de "TODO LIST"'
                 Style="{StaticResource Headline}"
                 SemanticProperties.HeadingLevel="Level1" />
 
             <Label
-                Text="{Binding Mensaje}"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dont met"
+                Text="Equipo 3"
                 FontSize="18"
-                HorizontalOptions="Center"
-                />
+                HorizontalOptions="Center"/>
+
+            <Label
+                Text="Abel Alejando Santiago Garcia"
+                FontSize="15"
+                HorizontalOptions="Center"/>
+
+            <Label
+                Text="Raul Issac Candelario Escobar "
+                FontSize="15"
+                HorizontalOptions="Center"/>
+
+            <Label
+                Text="Cesar Emmanuel Ortiz Escobar"
+                FontSize="15"
+                HorizontalOptions="Center"/>
 
             <Button
                 x:Name="CounterBtn"
-                Text="Click me" 
+                Text="Ir a la lista de tareas" 
                 Command="{Binding StartAppCommand}"
-                SemanticProperties.Hint="Counts the number of times you click"
-                HorizontalOptions="Fill" />
+                SemanticProperties.Hint=""
+                HorizontalOptions="Fill"
+                Background="Black"/>
             <Entry
                 Placeholder="Enter your name"
                 Text="{Binding Name}"
-                HorizontalOptions="Fill" />
+                HorizontalOptions="Fill"
+            />
         </VerticalStackLayout>
     </ScrollView>
 

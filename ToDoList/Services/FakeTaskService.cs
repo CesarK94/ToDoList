@@ -25,7 +25,7 @@ namespace ToDoList.Services
 
         public async Task AddTask(Tarea tarea)
         {
-            Tasks.Add(tarea);
+           Tasks.Add(tarea);
         }
 
         public List<Tarea> GetTasks()
