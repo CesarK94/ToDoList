@@ -5,7 +5,13 @@
              Title="ToDoPage"
              xmlns:helpers="clr-namespace:TodoList.Helpers"
              Background="#fffff8"
+             xmlns:converts="clr-namespace:ToDoList.Converters"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              >
+    <ContentPage.Resources>
+        <converts:TareaCompletada x:Key="tareaCompletadaConverter"/>
+        <converts:IsTareaCompletada x:Key="isTareaCompletadaConverter"/>
+    </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Command="{Binding AbrirRegistroCommand}">
@@ -26,32 +32,47 @@
                 <DataTemplate>
                     <Grid Margin="15">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Frame Grid.RowSpan="2"
-                               Grid.Column="2"
-                               CornerRadius="10"
-                               BackgroundColor="#f0f0f0"
-                               HasShadow="False">
-                            <StackLayout>
+
+                        <CheckBox
+                            x:Name="mCheck"
+                            Grid.Column="0"
+                            IsChecked="{Binding Estado, Converter={StaticResource isTareaCompletadaConverter}}"
+                            >
+                            <!--<toolkit:EventToCommandBehavisor
+                                EventName="CheckedChanged"
+                                Command="{Binding CambiarEstadoCommand}"
+                                CommandParameter="{Binding .}"
+                                />-->
+
+                        </CheckBox>
+                        
+                            <VerticalStackLayout Padding="10" Grid.Column="1" Grid.ColumnSpan="4">
                                 <Label Text="{Binding Titulo}"
                                    FontAttributes="Bold"
                                    FontSize="15"
                                    HorizontalOptions="Start"
                                    Margin="0,0,10,0"
-                                   TextColor="Black"/>
-                                <Label Text="{Binding Descripcion}"
+                                   TextColor="Black"
+                                   TextDecorations="{Binding Source={x:Reference mCheck}, Path=IsChecked, Converter={StaticResource tareaCompletadaConverter}}"/>
+                            <Label Text="{Binding Descripcion}"
                                    FontSize="10"
                                    HorizontalOptions="Start"
                                    Margin="0,0,10,0"
-                                   TextColor="Black"/>
-                            </StackLayout>
+                                   TextColor="Black"
+                                   TextDecorations="{Binding Source={x:Reference mCheck}, Path=IsChecked, Converter={StaticResource tareaCompletadaConverter}}"/>
+                        </VerticalStackLayout>
 
-                        </Frame>
+                        <VerticalStackLayout Padding="10" Grid.Column="5">
+                        </VerticalStackLayout>
+
+                        
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

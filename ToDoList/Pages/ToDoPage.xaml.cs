@@ -6,7 +6,7 @@ public partial class ToDoPage : ContentPage
 {
 	public ToDoPage(TodoViewModel mv)
 	{
-		InitializeComponent();
+        InitializeComponent();
 		BindingContext = mv;
 	}
 
