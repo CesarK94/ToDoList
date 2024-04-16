@@ -1,5 +1,6 @@
 ﻿using Firebase.Database;
 using Firebase.Database.Query;
+using Newtonsoft.Json;
 using System;
 using ToDoList.Models;
 
@@ -41,6 +42,36 @@ namespace ToDoList.Services
             }).ToList();
         }
 
+        /*
+        public async Task<bool> DeleteTaskAsync(Tarea tarea)
+        {
+            try
+            {
+                await firebaseClient.Child("Todo").Child(tarea.Id).DeleteAsync();
+                return true; // La eliminación fue exitosa
+            }
+            catch (Exception)
+            {
+                return false; // La eliminación falló
+            }
+        }
+        */
+
+        public async Task<bool> EditTaskAsync(Tarea tarea)
+        {
+            try
+            {
+                await firebaseClient.Child("Todo").Child(tarea.Id).PutAsync(tarea);
+                return true; // La edición fue exitosa
+            }
+            catch (Exception)
+            {
+                return false; // La edición falló
+            }
+        }
+        
     }
+
 }
+
 

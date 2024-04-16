@@ -70,9 +70,32 @@ namespace ToDoList.ViewModel
 
             Shell.Current.GoToAsync(nameof(RegistroTareaPage), parametros);
         }
-
+        /*
         [RelayCommand]
-        private void TaskCompleted(Tarea tarea)
+        public async Task RemoveTask(Tarea tarea)
+        {
+            if (tarea == null)
+            {
+                return;
+            }
+
+            // Eliminar la tarea de Firebase
+            bool deletedFromFirebase = await fakeService.DeleteTaskAsync(tarea);
+
+            if (deletedFromFirebase)
+            {
+                // Si la tarea se eliminó correctamente de Firebase, también la eliminamos de nuestra colección local
+                Tareas.Remove(tarea);
+            }
+            else
+            {
+                // Manejar el caso en que la eliminación de la tarea de Firebase falla
+                Debug.WriteLine("La eliminación de la tarea de Firebase falló.");
+            }
+        }
+        */
+        [RelayCommand]
+        private async Task TaskCompleted(Tarea tarea)
         {
             if (tarea == null)
             {
@@ -85,6 +108,9 @@ namespace ToDoList.ViewModel
                     { "Tarea_Complete", tarea }
                 };
                 _ = Shell.Current.GoToAsync(nameof(RegistroTareaPage), parametros);
+            } else
+            {
+                await fakeService.EditTaskAsync(tarea);
             }
             
         }

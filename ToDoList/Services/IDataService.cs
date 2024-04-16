@@ -10,8 +10,10 @@ namespace ToDoList.Services
 
 		public Task AddTask(Tarea tarea);
         public Task<List<Tarea>> GetTasks();
-        //Task<bool> DeleteTask(Tarea tarea);
-		
-	}
+        //Task<bool> DeleteTaskAsync(Tarea tarea);
+        Task<bool> EditTaskAsync(Tarea tarea);
+
+
+    }
 }
 

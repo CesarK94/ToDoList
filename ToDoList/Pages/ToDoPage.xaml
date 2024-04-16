@@ -54,7 +54,7 @@
                    FontSize="Medium"/>
                     <Button
                     Grid.Column="2"
-                    Text="Log"
+                    Text="Logout"
                     Command="{Binding LogoutCommand}"
                     BackgroundColor="#726EFE">
                     </Button>
@@ -115,13 +115,13 @@
                             FontSize="15"
                             HorizontalOptions="Start"
                             Margin="0,0,10,0"
-                            TextColor="Black"
+                            TextColor="White"
                             TextDecorations="{Binding Source={x:Reference mCheck}, Path=IsChecked, Converter={StaticResource tareaCompletadaConverter}}"/>
                                         <Label Text="{Binding Descripcion}"
                             FontSize="10"
                             HorizontalOptions="Start"
                             Margin="0,0,10,0"
-                            TextColor="Black"
+                            TextColor="White"
                             TextDecorations="{Binding Source={x:Reference mCheck}, Path=IsChecked, Converter={StaticResource tareaCompletadaConverter}}"/>
                                     </VerticalStackLayout>
 
