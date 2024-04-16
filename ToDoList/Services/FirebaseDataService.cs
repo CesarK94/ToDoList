@@ -11,7 +11,8 @@ namespace ToDoList.Services
 	{
         public List<Tarea> Tasks { get; set; } = new();
         FirebaseClient firebaseClient;
-        string UserId = JsonConvert.DeserializeObject<Firebase.Auth.FirebaseAuth>(Preferences.Get("FreshFirebaseToken", "")).User.LocalId;
+        string UserId = null;
+
 
         public FirebaseDataService()
         {
@@ -20,24 +21,44 @@ namespace ToDoList.Services
 
         public async Task AddTask(Tarea tarea)
         {
-           await firebaseClient.Child(UserId).Child("Todo").PostAsync(tarea);
+            UserId = JsonConvert.DeserializeObject<Firebase.Auth.FirebaseAuth>(Preferences.Get("FreshFirebaseToken", "")).User.LocalId;
+            Console.WriteLine(UserId);
+
+            if (UserId != null)
+            {
+                await firebaseClient.Child(UserId).Child("Todo").PostAsync(tarea);
+            }
+            return;
         }
         public async Task<List<Tarea>> GetTasks()
         {
-            return (await firebaseClient.Child(UserId).Child("Todo").OnceAsync<Tarea>()).Select(item => new Tarea
-            {
-                Id = item.Key,
-                Titulo = item.Object.Titulo,
-                Descripcion = item.Object.Descripcion,
-                FechaInicial = item.Object.FechaInicial,
-                FechaFinal = item.Object.FechaFinal,
-                TipoTarea = item.Object.TipoTarea,
-                Prioridad = item.Object.Prioridad,
-                Estado = item.Object.Estado,
-                Encuesta = item.Object.Encuesta,
-                URl = item.Object.URl
+            UserId = JsonConvert.DeserializeObject<Firebase.Auth.FirebaseAuth>(Preferences.Get("FreshFirebaseToken", "")).User.LocalId;
+            Console.WriteLine(UserId);
 
-            }).ToList();
+
+            if (UserId != null)
+            {
+                return (await firebaseClient.Child(UserId).Child("Todo").OnceAsync<Tarea>()).Select(item => new Tarea
+                {
+                    Id = item.Key,
+                    Titulo = item.Object.Titulo,
+                    Descripcion = item.Object.Descripcion,
+                    FechaInicial = item.Object.FechaInicial,
+                    FechaFinal = item.Object.FechaFinal,
+                    TipoTarea = item.Object.TipoTarea,
+                    Prioridad = item.Object.Prioridad,
+                    Estado = item.Object.Estado,
+                    Encuesta = item.Object.Encuesta,
+                    URl = item.Object.URl
+
+                }).ToList();
+
+            }
+            else
+            {
+                return null;
+            }
+           
         }
 
         /*
@@ -57,6 +78,7 @@ namespace ToDoList.Services
 
         public async Task<bool> EditTaskAsync(Tarea tarea)
         {
+            UserId = JsonConvert.DeserializeObject<Firebase.Auth.FirebaseAuth>(Preferences.Get("FreshFirebaseToken", "")).User.LocalId;
             try
             {
                 await firebaseClient.Child(UserId).Child("Todo").Child(tarea.Id).PutAsync(tarea);

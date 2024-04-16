@@ -19,6 +19,8 @@ namespace ToDoList
         private async void ValidateToken()
         {
             var token = Preferences.Get("FreshFirebaseToken", "");
+            Console.WriteLine(token);
+
             if (string.IsNullOrEmpty(token))
             {
                 await Shell.Current.GoToAsync(nameof(LoginPage));
