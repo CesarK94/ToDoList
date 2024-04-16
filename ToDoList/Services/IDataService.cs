@@ -9,7 +9,9 @@ namespace ToDoList.Services
 		public List<Tarea> Tasks { get; set; }
 
 		public Task AddTask(Tarea tarea);
-		public List<Tarea> GetTasks();
+        public Task<List<Tarea>> GetTasks();
+        //Task<bool> DeleteTask(Tarea tarea);
+		
 	}
 }
 

@@ -23,17 +23,30 @@ namespace ToDoList.ViewModel
             fakeService = service;
         }
         [RelayCommand]
-        public void AgrearTarea()
+        public void AgregarTarea()
         {
             IsRefresh = true;
             RefreshItems();
             IsRefresh = false;
         }
 
-        void RefreshItems()
+        [RelayCommand]
+        public async void Logout()
         {
+            Preferences.Remove("FreshFirebaseToken");
+            Shell.Current.GoToAsync(nameof(LoginPage));
+        }
+
+        async Task RefreshItems()
+        {
+            List<Tarea> nuevasTareas = await fakeService.GetTasks();
+            
             Tareas.Clear();
-            fakeService.Tasks.ForEach(Tareas.Add);
+
+            foreach (var tarea in nuevasTareas)
+            {
+                Tareas.Add(tarea);
+            }
         }
 
         [RelayCommand]
@@ -45,18 +58,38 @@ namespace ToDoList.ViewModel
         [RelayCommand]
         public void EditarRegistro()
         {
-            if (tareaSeleccionada == null) 
+            if (TareaSeleccionada == null) 
             {
                 return;
             }
 
             ShellNavigationQueryParameters parametros = new()
             {
-                { "Tarea", tareaSeleccionada }
+                { "Tarea", TareaSeleccionada }
             };
 
             Shell.Current.GoToAsync(nameof(RegistroTareaPage), parametros);
         }
+
+        [RelayCommand]
+        private void TaskCompleted(Tarea tarea)
+        {
+            if (tarea == null)
+            {
+                return;
+            }
+            if (tarea.TipoTarea == eTipoTarea.Encuesta)
+            {
+                ShellNavigationQueryParameters parametros = new()
+                {
+                    { "Tarea_Complete", tarea }
+                };
+                _ = Shell.Current.GoToAsync(nameof(RegistroTareaPage), parametros);
+            }
+            
+        }
+
+
 
 
     }
