@@ -48,7 +48,7 @@
                      FontAttributes="Bold"
                      FontSize="24"
                      HorizontalOptions="CenterAndExpand"
-                     Text="Registrate"
+                     Text="registro"
                      TextColor="#08C6AB" />
                         <Entry
                      Grid.Row="1"
