@@ -1,4 +1,5 @@
-﻿using Firebase.Database;
+﻿using Firebase.Auth;
+using Firebase.Database;
 using Firebase.Database.Query;
 using Newtonsoft.Json;
 using System;
@@ -10,23 +11,20 @@ namespace ToDoList.Services
 	{
         public List<Tarea> Tasks { get; set; } = new();
         FirebaseClient firebaseClient;
+        string UserId = JsonConvert.DeserializeObject<Firebase.Auth.FirebaseAuth>(Preferences.Get("FreshFirebaseToken", "")).User.LocalId;
 
         public FirebaseDataService()
         {
             firebaseClient = new FirebaseClient("https://todolist-7e01a-default-rtdb.firebaseio.com/");
-            firebaseClient
-                .Child("Todo")
-                .AsObservable<Tarea>()
-                .Subscribe(item => Tasks.Add(item.Object));
         }
 
         public async Task AddTask(Tarea tarea)
         {
-           await firebaseClient.Child("Todo").PostAsync(tarea);
+           await firebaseClient.Child(UserId).Child("Todo").PostAsync(tarea);
         }
         public async Task<List<Tarea>> GetTasks()
         {
-            return (await firebaseClient.Child("Todo").OnceAsync<Tarea>()).Select(item => new Tarea
+            return (await firebaseClient.Child(UserId).Child("Todo").OnceAsync<Tarea>()).Select(item => new Tarea
             {
                 Id = item.Key,
                 Titulo = item.Object.Titulo,
@@ -61,7 +59,7 @@ namespace ToDoList.Services
         {
             try
             {
-                await firebaseClient.Child("Todo").Child(tarea.Id).PutAsync(tarea);
+                await firebaseClient.Child(UserId).Child("Todo").Child(tarea.Id).PutAsync(tarea);
                 return true; // La edición fue exitosa
             }
             catch (Exception)
