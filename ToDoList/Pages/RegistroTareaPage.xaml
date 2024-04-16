@@ -6,6 +6,7 @@
              Title="RegistroTareaPage">
     <ContentPage.Resources>
         <local:IsTareaTipoEncuesta x:Key="isTareaTipoEncuesta" />
+        <local:TipoTareaToStringConverter x:Key="TipoTareaToStringConverter" />
     </ContentPage.Resources>
     <VerticalStackLayout
         HorizontalOptions="CenterAndExpand">
@@ -36,7 +37,10 @@
             x:Name="pikerTipo"
             Title="Tipo de Tarea"
             ItemsSource="{Binding TiposTarea}"
-            />
+            SelectedItem="{Binding Tarea.TipoTarea, Converter={StaticResource TipoTareaToStringConverter}}"
+            >
+            
+        </Picker>
         <Button
             Text="Agregar Encuesta"
             HorizontalOptions="FillAndExpand"

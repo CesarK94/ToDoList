@@ -22,12 +22,15 @@
     </ContentPage.ToolbarItems>
 
     <RefreshView IsRefreshing="{Binding IsRefresh}"
-                 Command="{Binding AgregarTareasCommand}">
-        <CollectionView ItemsSource="{Binding Tareas}"
+                 Command="{Binding AgregarTareaCommand}">
+        <CollectionView 
+            x:Name="mCollectionView"
+            ItemsSource="{Binding Tareas}"
             SelectionMode="Single"
             SelectedItem="{Binding TareaSeleccionada}"
             SelectionChangedCommand="{Binding EditarRegistroCommand}"
-            SelectionChangedCommandParameter="{Binding Path=SelectedItem, Source={RelativeSource Self}}">
+            SelectionChangedCommandParameter="{Binding Path=SelectedItem, Source={RelativeSource Self}}"
+            >
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="15">
@@ -45,11 +48,16 @@
                             Grid.Column="0"
                             IsChecked="{Binding Estado, Converter={StaticResource isTareaCompletadaConverter}}"
                             >
-                            <!--<toolkit:EventToCommandBehavisor
-                                EventName="CheckedChanged"
-                                Command="{Binding CambiarEstadoCommand}"
-                                CommandParameter="{Binding .}"
-                                />-->
+
+                            <CheckBox.Behaviors>
+
+                                <toolkit:EventToCommandBehavior
+                                    EventName="CheckedChanged" 
+                                    Command="{Binding Path=BindingContext.TaskCompletedCommand, Source={Reference mCollectionView} }" 
+                                    CommandParameter="{Binding .}">
+                                </toolkit:EventToCommandBehavior>
+
+                            </CheckBox.Behaviors>
 
                         </CheckBox>
                         

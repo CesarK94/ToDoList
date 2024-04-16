@@ -14,9 +14,10 @@ public partial class ToDoPage : ContentPage
 	{
         base.OnAppearing();
 		TodoViewModel mViewModel = ((TodoViewModel)BindingContext);
-		if (mViewModel.AgrearTareaCommand.CanExecute(null))
+
+        if (mViewModel.AgregarTareaCommand.CanExecute(null))
 		{
-			mViewModel.AgrearTareaCommand.Execute(null);
+			mViewModel.AgregarTareaCommand.Execute(null);
 		}
     }
 }
