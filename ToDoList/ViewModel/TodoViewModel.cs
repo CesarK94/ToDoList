@@ -30,6 +30,13 @@ namespace ToDoList.ViewModel
             IsRefresh = false;
         }
 
+        [RelayCommand]
+        public async void Logout()
+        {
+            Preferences.Remove("FreshFirebaseToken");
+            Shell.Current.GoToAsync(nameof(LoginPage));
+        }
+
         async Task RefreshItems()
         {
             List<Tarea> nuevasTareas = await fakeService.GetTasks();

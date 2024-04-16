@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using ToDoList.ViewModel;
 
 namespace ToDoList.Pages;
@@ -7,7 +8,8 @@ public partial class ToDoPage : ContentPage
 	public ToDoPage(TodoViewModel mv)
 	{
         InitializeComponent();
-		BindingContext = mv;
+        GetProfileInfo();
+        BindingContext = mv;
 	}
 
 	protected override void OnAppearing()
@@ -19,5 +21,11 @@ public partial class ToDoPage : ContentPage
 		{
 			mViewModel.AgregarTareaCommand.Execute(null);
 		}
+    }
+
+	private void GetProfileInfo()
+    {
+		var userInfo = JsonConvert.DeserializeObject<Firebase.Auth.FirebaseAuth>(Preferences.Get("FreshFirebaseToken", ""));
+        UserEmial.Text = userInfo.User.Email;
     }
 }

@@ -21,70 +21,122 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
 
-    <RefreshView IsRefreshing="{Binding IsRefresh}"
-                 Command="{Binding AgregarTareaCommand}">
-        <CollectionView 
-            x:Name="mCollectionView"
-            ItemsSource="{Binding Tareas}"
-            SelectionMode="Single"
-            SelectedItem="{Binding TareaSeleccionada}"
-            SelectionChangedCommand="{Binding EditarRegistroCommand}"
-            SelectionChangedCommandParameter="{Binding Path=SelectedItem, Source={RelativeSource Self}}"
-            >
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Margin="15">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="4*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+    <ContentPage.Content>
+        <Grid
+        BackgroundColor="#37465B"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="0">
+                <Grid Margin="30">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-                        <CheckBox
-                            x:Name="mCheck"
-                            Grid.Column="0"
-                            IsChecked="{Binding Estado, Converter={StaticResource isTareaCompletadaConverter}}"
-                            >
 
-                            <CheckBox.Behaviors>
+                    <Label
+                    Grid.Column="0"
+                    Text="Hola: "
+                    VerticalOptions="Center"
+                    FontSize="Medium"/>
+                    <Label x:Name="UserEmial" 
+                   Grid.Column="1"
+                   Grid.ColumnSpan="2"
+                   VerticalOptions="Center"
+                   FontSize="Medium"/>
+                    <Button
+                    Grid.Column="2"
+                    Text="Log"
+                    Command="{Binding LogoutCommand}"
+                    BackgroundColor="#726EFE">
+                    </Button>
+                </Grid>
+            </StackLayout>
 
-                                <toolkit:EventToCommandBehavior
-                                    EventName="CheckedChanged" 
-                                    Command="{Binding Path=BindingContext.TaskCompletedCommand, Source={Reference mCollectionView} }" 
-                                    CommandParameter="{Binding .}">
-                                </toolkit:EventToCommandBehavior>
+            <Frame
+            Grid.Row="1"
+            Margin="0,0,0,-40"
+            BorderColor="#08C6AB"
+            BackgroundColor="#212B38"
+            CornerRadius="50"
+            HasShadow="True"
+            HeightRequest="700">
+                <RefreshView IsRefreshing="{Binding IsRefresh}"
+          Command="{Binding AgregarTareaCommand}">
+                    <CollectionView 
+                     x:Name="mCollectionView"
+                     ItemsSource="{Binding Tareas}"
+                     SelectionMode="Single"
+                     SelectedItem="{Binding TareaSeleccionada}"
+                     SelectionChangedCommand="{Binding EditarRegistroCommand}"
+                     SelectionChangedCommandParameter="{Binding Path=SelectedItem, Source={RelativeSource Self}}"
+                     >
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="15">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="4*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
 
-                            </CheckBox.Behaviors>
+                                    <CheckBox
+                     x:Name="mCheck"
+                     Grid.Column="0"
+                     IsChecked="{Binding Estado, Converter={StaticResource isTareaCompletadaConverter}}"
+                     >
 
-                        </CheckBox>
-                        
-                            <VerticalStackLayout Padding="10" Grid.Column="1" Grid.ColumnSpan="4">
-                                <Label Text="{Binding Titulo}"
-                                   FontAttributes="Bold"
-                                   FontSize="15"
-                                   HorizontalOptions="Start"
-                                   Margin="0,0,10,0"
-                                   TextColor="Black"
-                                   TextDecorations="{Binding Source={x:Reference mCheck}, Path=IsChecked, Converter={StaticResource tareaCompletadaConverter}}"/>
-                            <Label Text="{Binding Descripcion}"
-                                   FontSize="10"
-                                   HorizontalOptions="Start"
-                                   Margin="0,0,10,0"
-                                   TextColor="Black"
-                                   TextDecorations="{Binding Source={x:Reference mCheck}, Path=IsChecked, Converter={StaticResource tareaCompletadaConverter}}"/>
-                        </VerticalStackLayout>
+                                        <CheckBox.Behaviors>
 
-                        <VerticalStackLayout Padding="10" Grid.Column="5">
-                        </VerticalStackLayout>
+                                            <toolkit:EventToCommandBehavior
+                             EventName="CheckedChanged" 
+                             Command="{Binding Path=BindingContext.TaskCompletedCommand, Source={Reference mCollectionView} }" 
+                             CommandParameter="{Binding .}">
+                                            </toolkit:EventToCommandBehavior>
 
-                        
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </RefreshView>
-    
+                                        </CheckBox.Behaviors>
+
+                                    </CheckBox>
+
+                                    <VerticalStackLayout Padding="10" Grid.Column="1" Grid.ColumnSpan="4">
+                                        <Label Text="{Binding Titulo}"
+                            FontAttributes="Bold"
+                            FontSize="15"
+                            HorizontalOptions="Start"
+                            Margin="0,0,10,0"
+                            TextColor="Black"
+                            TextDecorations="{Binding Source={x:Reference mCheck}, Path=IsChecked, Converter={StaticResource tareaCompletadaConverter}}"/>
+                                        <Label Text="{Binding Descripcion}"
+                            FontSize="10"
+                            HorizontalOptions="Start"
+                            Margin="0,0,10,0"
+                            TextColor="Black"
+                            TextDecorations="{Binding Source={x:Reference mCheck}, Path=IsChecked, Converter={StaticResource tareaCompletadaConverter}}"/>
+                                    </VerticalStackLayout>
+
+                                    <VerticalStackLayout Padding="10" Grid.Column="5">
+                                    </VerticalStackLayout>
+
+
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </RefreshView>
+
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+
 </ContentPage>

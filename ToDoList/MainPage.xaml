@@ -5,59 +5,5 @@
              xmlns:local="clr-namespace:ToDoList.ViewModel"
              Title=""
              >
-    
-    <ContentPage.BindingContext>
-        <local:MainViewModel />
-    </ContentPage.BindingContext>
-
-    <ScrollView>
-        <VerticalStackLayout
-            Padding="30,0"
-            Spacing="30">
-            <Image
-                Source="dotnet_bot.png"
-                HeightRequest="185"
-                Aspect="AspectFit"
-                SemanticProperties.Description="dot net bot in a race car number eight" />
-
-            <Label
-                Text='Bienvenido a la APP de "TODO LIST"'
-                Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
-
-            <Label
-                Text="Equipo 3"
-                FontSize="18"
-                HorizontalOptions="Center"/>
-
-            <Label
-                Text="Abel Alejando Santiago Garcia"
-                FontSize="15"
-                HorizontalOptions="Center"/>
-
-            <Label
-                Text="Raul Issac Candelario Escobar "
-                FontSize="15"
-                HorizontalOptions="Center"/>
-
-            <Label
-                Text="Cesar Emmanuel Ortiz Escobar"
-                FontSize="15"
-                HorizontalOptions="Center"/>
-
-            <Button
-                x:Name="CounterBtn"
-                Text="Ir a la lista de tareas" 
-                Command="{Binding StartAppCommand}"
-                SemanticProperties.Hint=""
-                HorizontalOptions="Fill"
-                Background="Black"/>
-            <Entry
-                Placeholder="Enter your name"
-                Text="{Binding Name}"
-                HorizontalOptions="Fill"
-            />
-        </VerticalStackLayout>
-    </ScrollView>
 
 </ContentPage>
